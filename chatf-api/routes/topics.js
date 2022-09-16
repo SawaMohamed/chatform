@@ -1,5 +1,4 @@
 var express = require("express");
-const Sections = require("../schemas/sections.schema copy 2");
 var router = express.Router();
 const Topics = require("../schemas/topics.schema copy 2");
 
@@ -13,18 +12,18 @@ router.get("/", async function (req, res, next) {
 });
 router.post("/", async function (req, res, next) {
   const { title, text, section, member } = req.body;
-  const newScetion = await Topics.create({
+  const newTopic = await Topics.create({
     title,
     text,
     section,
     member,
     createdAt: new Date(),
   });
-  res.send(newScetion);
+  res.send(newTopic);
 });
 router.put("/", async function (req, res) {
   const { title, text, _id } = req.body;
-  const newScetion = await Topics.findByIdAndUpdate(
+  const updateTopic = await Topics.findByIdAndUpdate(
     {
       title,
       text,
@@ -33,18 +32,18 @@ router.put("/", async function (req, res) {
     },
     { new: true }
   );
-  res.send(newScetion);
+  res.send(updateTopic);
 });
 
 router.delete("/", async function (req, res) {
   const { _id } = req.body;
-  const newScetion = await Topics.findByIdAndUpdate(
+  const deleteTopic = await Topics.findByIdAndUpdate(
     _id,
     {
       isvisible: false,
     },
     { new: true }
   );
-  res.send(newScetion);
+  res.send(deleteTopic);
 });
 module.exports = router;

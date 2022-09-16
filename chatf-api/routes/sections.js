@@ -18,19 +18,19 @@ router.post('/', async function(req, res, next) {
 });
 router.put('/', async function(req, res){
 const {name, discription, _id} = req.body;
-const newScetion = await Sections.findByIdAndUpdate(_id,
+const updateScetion = await Sections.findByIdAndUpdate(_id,
    {
     name,
     discription,
 },{new: true});
-res.send(newScetion)
+res.send(updateScetion)
 })
 router.delete('/', async function(req, res){
 const { _id } = req.body;
-const newScetion = await Sections.findByIdAndUpdate(_id,
+const deleteScetion = await Sections.findByIdAndUpdate(_id,
 {
   isvisible: false,
 }, {new: true})
-res.send(newScetion)
+res.send(deleteScetion)
 });
 module.exports = router;

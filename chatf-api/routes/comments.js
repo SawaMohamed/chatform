@@ -12,7 +12,7 @@ router.get("/", async function (req, res, next) {
 });
 router.post("/", async function (req, res, next) {
   const { text, topic, member } = req.body;
-  const newComment = await Members.create({
+  const newComment = await Comments.create({
     text,
     topic,
     member,
@@ -22,7 +22,7 @@ router.post("/", async function (req, res, next) {
 });
 router.put("/", async function (req, res) {
   const { text, _id } = req.body;
-  const newScetion = await Members.findByIdAndUpdate(
+  const newComment = await Comments.findByIdAndUpdate(
     _id,
     {
       text,
@@ -30,18 +30,18 @@ router.put("/", async function (req, res) {
     },
     { new: true }
   );
-  res.send(newScetion);
+  res.send(newComment);
 });
 
 router.delete("/", async function (req, res) {
   const { _id } = req.body;
-  const newScetion = await Members.findByIdAndUpdate(
+  const newComment = await Comments.findByIdAndUpdate(
     _id,
     {
       isvisible: false,
     },
     { new: true }
   );
-  res.send(newScetion);
+  res.send(newComment);
 });
 module.exports = router;
